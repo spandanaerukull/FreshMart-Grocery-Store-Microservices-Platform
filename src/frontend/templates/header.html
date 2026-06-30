@@ -20,83 +20,229 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    >
+
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>
-        {{ if $.is_cymbal_brand }}
-        Cymbal Shops
-        {{ else }}
-        Online Boutique
-        {{ end }}
-    </title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
-        crossorigin="anonymous">
+
+    <meta
+        name="description"
+        content="FreshMart Grocery Store - Fresh groceries delivered to your doorstep."
+    >
+
+    <title>FreshMart Grocery Store</title>
+
+    <link
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous"
+    >
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Symbols:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/styles.css">
-    <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/cart.css">
-    <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/order.css">
-    <link rel="stylesheet" type="text/css" href="{{ $.baseUrl }}/static/styles/bot.css">
-    {{ if $.is_cymbal_brand }}
-    <link rel='shortcut icon' type='image/x-icon' href='{{ $.baseUrl }}/static/favicon-cymbal.ico' />
-    {{ else }}
-    <link rel='shortcut icon' type='image/x-icon' href='{{ $.baseUrl }}/static/favicon.ico' />
-    {{ end }}
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Symbols:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{ $.baseUrl }}/static/styles/styles.css"
+    >
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{ $.baseUrl }}/static/styles/cart.css"
+    >
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{ $.baseUrl }}/static/styles/order.css"
+    >
+
+    <link
+        rel="stylesheet"
+        type="text/css"
+        href="{{ $.baseUrl }}/static/styles/bot.css"
+    >
+
+    <link
+        rel="shortcut icon"
+        type="image/x-icon"
+        href="{{ $.baseUrl }}/static/favicon.ico"
+    >
 </head>
 
 <body>
     <header>
+
         {{ if $.frontendMessage }}
         <div class="navbar">
             <div class="container d-flex justify-content-center">
-                <div class="h-free-shipping">{{ $.frontendMessage }}</div>
+                <div class="h-free-shipping">
+                    {{ $.frontendMessage }}
+                </div>
             </div>
         </div>
         {{ end }}
+
         <div class="navbar sub-navbar">
-            <div class="container d-flex justify-content-between">
-                <a href="{{ $.baseUrl }}/" class="navbar-brand d-flex align-items-center">
-                    {{ if $.is_cymbal_brand }}
-                    <img src="{{ $.baseUrl }}/static/icons/Cymbal_NavLogo.svg" alt="" class="top-left-logo-cymbal" />
-                    {{ else }}
-                    <img src="{{ $.baseUrl }}/static/icons/Hipster_NavLogo.svg" alt="" class="top-left-logo" />
-                    {{ end }}
+            <div class="container d-flex justify-content-between align-items-center">
+
+                <a
+                    href="{{ $.baseUrl }}/"
+                    class="navbar-brand d-flex align-items-center"
+                    aria-label="FreshMart home page"
+                    style="text-decoration: none;"
+                >
+                    <span
+                        aria-hidden="true"
+                        style="
+                            font-size: 30px;
+                            margin-right: 8px;
+                            line-height: 1;
+                        "
+                    >
+                        🛒
+                    </span>
+
+                    <span
+                        style="
+                            font-family: 'DM Sans', sans-serif;
+                            font-size: 28px;
+                            font-weight: 700;
+                            color: #228B22;
+                            letter-spacing: -0.5px;
+                        "
+                    >
+                        FreshMart
+                    </span>
+
+                    <span
+                        style="
+                            font-family: 'DM Sans', sans-serif;
+                            font-size: 13px;
+                            font-weight: 500;
+                            color: #666666;
+                            margin-left: 8px;
+                            margin-top: 7px;
+                        "
+                    >
+                        Grocery Store
+                    </span>
                 </a>
+
                 <div class="controls">
 
                     {{ if $.show_currency }}
                     <div class="h-controls">
                         <div class="h-control">
-                            <span class="icon currency-icon"> {{ renderCurrencyLogo $.user_currency}}</span>
-                            <form method="POST" class="controls-form" action="{{ $.baseUrl }}/setCurrency" id="currency_form" >
-                                <select name="currency_code" onchange="document.getElementById('currency_form').submit();">
-                                        {{range $.currencies}}
-                                    <option value="{{.}}" {{if eq . $.user_currency}}selected="selected"{{end}}>{{.}}</option>
-                                    {{end}}
+
+                            <span class="icon currency-icon">
+                                {{ renderCurrencyLogo $.user_currency }}
+                            </span>
+
+                            <form
+                                method="POST"
+                                class="controls-form"
+                                action="{{ $.baseUrl }}/setCurrency"
+                                id="currency_form"
+                            >
+                                <label
+                                    for="currency_code"
+                                    class="sr-only"
+                                >
+                                    Select currency
+                                </label>
+
+                                <select
+                                    id="currency_code"
+                                    name="currency_code"
+                                    onchange="document.getElementById('currency_form').submit();"
+                                    aria-label="Select currency"
+                                >
+                                    {{ range $.currencies }}
+                                    <option
+                                        value="{{ . }}"
+                                        {{ if eq . $.user_currency }}
+                                        selected="selected"
+                                        {{ end }}
+                                    >
+                                        {{ . }}
+                                    </option>
+                                    {{ end }}
                                 </select>
                             </form>
-                            <img src="{{ $.baseUrl }}/static/icons/Hipster_DownArrow.svg" alt="" class="icon arrow" />
+
+                            <img
+                                src="{{ $.baseUrl }}/static/icons/Hipster_DownArrow.svg"
+                                alt=""
+                                class="icon arrow"
+                                aria-hidden="true"
+                            >
                         </div>
                     </div>
                     {{ end }}
 
                     {{ if $.assistant_enabled }}
-                    <a href="{{ $.baseUrl }}/assistant" class="cart-link">
-                      <img src="{{ $.baseUrl }}/static/icons/Hipster_WandIcon.svg" style="width: 22px; height: 22px;" alt="Assistant icon" class="logo" title="Assistant" />
+                    <a
+                        href="{{ $.baseUrl }}/assistant"
+                        class="cart-link"
+                        aria-label="FreshMart shopping assistant"
+                        title="Shopping Assistant"
+                    >
+                        <img
+                            src="{{ $.baseUrl }}/static/icons/Hipster_WandIcon.svg"
+                            alt="Shopping assistant"
+                            class="logo"
+                            style="width: 22px; height: 22px;"
+                        >
                     </a>
                     {{ end }}
 
-                    <a href="{{ $.baseUrl }}/cart" class="cart-link">
-                        <img src="{{ $.baseUrl }}/static/icons/Hipster_CartIcon.svg" alt="Cart icon" class="logo" title="Cart" />
+                    <a
+                        href="{{ $.baseUrl }}/cart"
+                        class="cart-link"
+                        aria-label="View FreshMart shopping cart"
+                        title="Shopping Cart"
+                    >
+                        <img
+                            src="{{ $.baseUrl }}/static/icons/Hipster_CartIcon.svg"
+                            alt="Shopping cart"
+                            class="logo"
+                        >
+
                         {{ if $.cart_size }}
-                        <span class="cart-size-circle">{{$.cart_size}}</span>
+                        <span
+                            class="cart-size-circle"
+                            aria-label="{{ $.cart_size }} items in cart"
+                        >
+                            {{ $.cart_size }}
+                        </span>
                         {{ end }}
                     </a>
+
                 </div>
             </div>
         </div>
 
     </header>
-    {{end}}
+{{ end }}
