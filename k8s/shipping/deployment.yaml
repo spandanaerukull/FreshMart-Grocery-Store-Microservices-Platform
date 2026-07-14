@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: shippingservice
+  namespace: freshmart
+  labels:
+    app: shippingservice
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: shippingservice
+
+  template:
+    metadata:
+      labels:
+        app: shippingservice
+
+    spec:
+      containers:
+      - name: shippingservice
+        image: shippingservice:local
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 50051

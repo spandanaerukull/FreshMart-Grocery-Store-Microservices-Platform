@@ -1,112 +1,112 @@
 {
-    "products": [
-        {
-            "id": "OLJCESPC7Z",
-            "name": "Sunglasses",
-            "description": "Add a modern touch to your outfits with these sleek aviator sunglasses.",
-            "picture": "/static/img/products/sunglasses.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 19,
-                "nanos": 990000000
-            },
-            "categories": ["accessories"]
-        },
-        {
-            "id": "66VCHSJNUP",
-            "name": "Tank Top",
-            "description": "Perfectly cropped cotton tank, with a scooped neckline.",
-            "picture": "/static/img/products/tank-top.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 18,
-                "nanos": 990000000
-            },
-            "categories": ["clothing", "tops"]
-        },
-        {
-            "id": "1YMWWN1N4O",
-            "name": "Watch",
-            "description": "This gold-tone stainless steel watch will work with most of your outfits.",
-            "picture": "/static/img/products/watch.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 109,
-                "nanos": 990000000
-            },
-            "categories": ["accessories"]
-        },
-        {
-            "id": "L9ECAV7KIM",
-            "name": "Loafers",
-            "description": "A neat addition to your summer wardrobe.",
-            "picture": "/static/img/products/loafers.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 89,
-                "nanos": 990000000
-            },
-            "categories": ["footwear"]
-        },
-        {
-            "id": "2ZYFJ3GM2N",
-            "name": "Hairdryer",
-            "description": "This lightweight hairdryer has 3 heat and speed settings. It's perfect for travel.",
-            "picture": "/static/img/products/hairdryer.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 24,
-                "nanos": 990000000
-            },
-            "categories": ["hair", "beauty"]
-        },
-        {
-            "id": "0PUK6V6EV0",
-            "name": "Candle Holder",
-            "description": "This small but intricate candle holder is an excellent gift.",
-            "picture": "/static/img/products/candle-holder.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 18,
-                "nanos": 990000000
-            },
-            "categories": ["decor", "home"]
-        },
-        {
-            "id": "LS4PSXUNUM",
-            "name": "Salt & Pepper Shakers",
-            "description": "Add some flavor to your kitchen.",
-            "picture": "/static/img/products/salt-and-pepper-shakers.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 18,
-                "nanos": 490000000
-            },
-            "categories": ["kitchen"]
-        },
-        {
-            "id": "9SIQT8TOJO",
-            "name": "Bamboo Glass Jar",
-            "description": "This bamboo glass jar can hold 57 oz (1.7 l) and is perfect for any kitchen.",
-            "picture": "/static/img/products/bamboo-glass-jar.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 5,
-                "nanos": 490000000
-            },
-            "categories": ["kitchen"]
-        },
-        {
-            "id": "6E92ZMYYFZ",
-            "name": "Mug",
-            "description": "A simple mug with a mustard interior.",
-            "picture": "/static/img/products/mug.jpg",
-            "priceUsd": {
-                "currencyCode": "USD",
-                "units": 8,
-                "nanos": 990000000
-            },
-            "categories": ["kitchen"]
-        }
-    ]
+  "products": [
+    {
+      "id": "OLJCESPC7Z",
+      "name": "Fresh Apples",
+      "description": "Crisp and naturally sweet apples, perfect for snacks, lunchboxes, and fresh fruit salads.",
+      "picture": "/static/img/products/apples.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 4,
+        "nanos": 990000000
+      },
+      "categories": ["fruits", "fresh-produce"]
+    },
+    {
+      "id": "66VCHSJNUP",
+      "name": "Whole Milk",
+      "description": "Fresh whole milk with a rich and creamy taste, ideal for breakfast, coffee, and cooking.",
+      "picture": "/static/img/products/whole-milk.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 3,
+        "nanos": 790000000
+      },
+      "categories": ["dairy", "beverages"]
+    },
+    {
+      "id": "1YMWWN1N4O",
+      "name": "Brown Eggs",
+      "description": "A dozen fresh brown eggs, ideal for breakfast, baking, and everyday cooking.",
+      "picture": "/static/img/products/brown-eggs.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 4,
+        "nanos": 490000000
+      },
+      "categories": ["dairy-and-eggs", "breakfast"]
+    },
+    {
+      "id": "L9ECAV7KIM",
+      "name": "Whole Wheat Bread",
+      "description": "Soft whole wheat bread made for sandwiches, toast, and healthy everyday meals.",
+      "picture": "/static/img/products/whole-wheat-bread.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 3,
+        "nanos": 290000000
+      },
+      "categories": ["bakery", "breakfast"]
+    },
+    {
+      "id": "2ZYFJ3GM2N",
+      "name": "Basmati Rice",
+      "description": "Premium long-grain basmati rice with a light aroma and fluffy texture after cooking.",
+      "picture": "/static/img/products/basmati-rice.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 12,
+        "nanos": 990000000
+      },
+      "categories": ["grains", "pantry"]
+    },
+    {
+      "id": "0PUK6V6EV0",
+      "name": "Fresh Tomatoes",
+      "description": "Juicy ripe tomatoes, perfect for salads, sandwiches, sauces, and home cooking.",
+      "picture": "/static/img/products/tomatoes.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 2,
+        "nanos": 990000000
+      },
+      "categories": ["vegetables", "fresh-produce"]
+    },
+    {
+      "id": "LS4PSXUNUM",
+      "name": "Bananas",
+      "description": "Fresh ripe bananas, naturally sweet and convenient for snacks, smoothies, and breakfast.",
+      "picture": "/static/img/products/bananas.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 1,
+        "nanos": 990000000
+      },
+      "categories": ["fruits", "fresh-produce"]
+    },
+    {
+      "id": "9SIQT8TOJO",
+      "name": "Greek Yogurt",
+      "description": "Creamy Greek yogurt with a smooth texture and high protein content for a healthy snack.",
+      "picture": "/static/img/products/greek-yogurt.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 5,
+        "nanos": 490000000
+      },
+      "categories": ["dairy", "healthy-foods"]
+    },
+    {
+      "id": "6E92ZMYYFZ",
+      "name": "Orange Juice",
+      "description": "Refreshing orange juice made from ripe oranges, ideal for breakfast and family meals.",
+      "picture": "/static/img/products/orange-juice.jpg",
+      "priceUsd": {
+        "currencyCode": "USD",
+        "units": 4,
+        "nanos": 990000000
+      },
+      "categories": ["beverages", "breakfast"]
+    }
+  ]
 }
