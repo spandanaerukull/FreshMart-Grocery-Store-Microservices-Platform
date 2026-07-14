@@ -1,4 +1,4 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 
 metadata:
@@ -8,7 +8,17 @@ metadata:
     app: frontend
 
 spec:
-  replicas: 1
+  replicas: 2
+
+  revisionHistoryLimit: 5      # Number of old ReplicaSets to retain to allow rollback.
+  progressDeadlineSeconds: 600  # The maximum time in seconds for a deployment to make progress before it is considered to be failed. The deployment controller will continue to process failed deployments and a condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status. Note that progress will not be estimated during the time a deployment is paused. Defaults to 600s.
+  minReadySeconds: 5   # The minimum number of seconds a newly created pod should be ready without any of its container crashing, for it to be considered available.
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
 
   selector:
     matchLabels:
@@ -20,26 +30,69 @@ spec:
         app: frontend
 
     spec:
+      automountServiceAccountToken: false  # Do not automatically mount the service account token into the pod.
+      terminationGracePeriodSeconds: 30  # The amount of time in seconds that Kubernetes will wait for a pod to terminate gracefully before
+
+      securityContext:  # Define security settings for the pod, including user and group IDs, file system group, and seccomp profile.
+        runAsNonRoot: true  # Ensure that the container runs as a non-root user.
+        runAsUser: 1000  # The user ID to run the container as.
+        runAsGroup: 1000  # The group ID to run the container as.
+        fsGroup: 1000  # The file system group ID for the pod.
+        seccompProfile:
+          type: RuntimeDefault  # Use the default seccomp profile for the container.
+
       containers:
         - name: frontend
           image: frontend:local
           imagePullPolicy: Never
+
           ports:
-            - containerPort: 8080
-          env:
-            - name: PRODUCT_CATALOG_SERVICE_ADDR
-              value: "productcatalogservice:3550"
-            - name: CURRENCY_SERVICE_ADDR
-              value: "currencyservice:7000"
-            - name: CART_SERVICE_ADDR
-              value: "cartservice:7070"
-            - name: RECOMMENDATION_SERVICE_ADDR
-              value: "recommendationservice:8080"
-            - name: SHIPPING_SERVICE_ADDR
-              value: "shippingservice:50051"
-            - name: CHECKOUT_SERVICE_ADDR
-              value: "checkoutservice:5050"
-            - name: AD_SERVICE_ADDR
-              value: "adservice:9555"
-            - name: SHOPPING_ASSISTANT_SERVICE_ADDR
-              value: "shoppingassistantservice:80"
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+
+          envFrom:
+            - configMapRef:
+                name: frontend-config
+
+          readinessProbe:  # Configure the readiness probe to determine if the container is ready to serve traffic.
+            httpGet:
+              path: /_healthz
+              port: http
+              httpHeaders:
+                - name: Cookie
+                  value: shop_session-id=x-readiness-probe
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
+
+          livenessProbe:  # Configure the liveness probe to determine if the container is still running and healthy.
+            httpGet:
+              path: /_healthz
+              port: http
+              httpHeaders:
+                - name: Cookie
+                  value: shop_session-id=x-liveness-probe
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
+
+          resources:  # Define the resource requests and limits for the container, specifying the minimum and maximum CPU and memory usage.
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+
+          securityContext:  # Define security settings for the container, including privilege escalation, capabilities, and file system permissions.
+            allowPrivilegeEscalation: false  # Do not allow the container to gain additional privileges.
+            privileged: false  # Ensure the container does not run in privileged mode.
+            readOnlyRootFilesystem: true  # Mount the container's root filesystem as read-only.
+            capabilities:
+              drop:
+                - ALL  # Drop all Linux capabilities for the container.
