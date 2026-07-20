@@ -1,14 +1,25 @@
-apiVersion: apps/v1
-kind: Deployment
+ apiVersion: apps/v1
+ kind: Deployment
 
-metadata:
+ metadata:
   name: productcatalogservice
   namespace: freshmart
   labels:
     app: productcatalogservice
 
-spec:
-  replicas: 1
+ spec:
+  replicas: 2
+
+  revisionHistoryLimit: 5 # The number of old ReplicaSets to retain to allow rollback.
+  progressDeadlineSeconds: 600 # The maximum time in seconds for a deployment to make progress before it is considered to be failed. The deployment controller will continue to process failed deployments and a condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status. Note that progress will not be estimated during the time a deployment is paused. Defaults to 600s.
+  minReadySeconds: 5  # The minimum number of seconds a newly created pod should be ready without any of its container crashing, for it to be considered available.
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
   selector:
     matchLabels:
       app: productcatalogservice
@@ -19,9 +30,57 @@ spec:
         app: productcatalogservice
 
     spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
+
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+
       containers:
         - name: productcatalogservice
           image: productcatalogservice:local
           imagePullPolicy: Never
+
           ports:
-            - containerPort: 3550
+            - name: grpc
+              containerPort: 3550
+              protocol: TCP
+
+          readinessProbe:
+            grpc:
+              port: 3550
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
+
+          livenessProbe:
+            grpc:
+              port: 3550
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+            successThreshold: 1
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            privileged: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
